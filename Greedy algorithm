@@ -1,1 +1,25 @@
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * 
+ * @author ghadh
+ */
+public class Greedy {
+
+    public static void GreedyChange(int amount) {
+        int[] denominations = {500, 100, 50, 10, 5, 1};
+        List<Integer> change = new ArrayList<>();
+        
+        for (int coin : denominations) {
+            while (amount >= coin) {
+                change.add(coin);
+                amount = amount - coin;
+            }
+        }
+        
+        System.out.println("change : " + change);
+        System.out.println("number of banknotes : " + change.size());
+    }
+}
 
