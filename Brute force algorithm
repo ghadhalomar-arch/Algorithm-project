@@ -41,11 +41,11 @@ public class BruteForce {
                                     bestOne = one;
                                 }
                             }
-                        } /* end for five */
-                    } /* end for ten */
-                } /* end for fifty */
-            } /* end for oneHundred */
-        } /* end for fiveHundred */
+                        } // end for five 
+                    } // end for ten 
+                } // end for fifty 
+            } // end for oneHundred 
+        } // end for fiveHundred 
 
         // printing
         System.out.println("\nAmount: " + amount);
@@ -61,10 +61,15 @@ public class BruteForce {
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        
+
+        double T1 = System.nanoTime();
+
         System.out.print("Enter the Amount You Wish To Check (no decimals): ");
         int amount = in.nextInt();
         brute_force_ATM(amount);
-    } /* main method */
-} /* BruteForce class */
+
+        double T2 = System.nanoTime();
+        System.out.print("\nExecution time:" + (T2-T1));
+    } // main method 
+} // BruteForce class 
 
