@@ -1,1 +1,72 @@
+package aryam.bruteforce;
+import java.util.Scanner;
+
+public class BruteForce {
+    public static void brute_force_ATM(int Amount) {
+        int amount = Amount; // القيمة الإجمالية للمبلغ
+        int bestNotesCount = Integer.MAX_VALUE;
+        
+        // متغيرات لتخزين أفضل عدد لكل فئة نقدية
+        int bestFiveHundred = 0, bestOneHundred = 0, bestFifty = 0, bestTen = 0, bestFive = 0, bestOne = 0;
+        
+        // حلقات متداخلة لتجربة كل الاحتمالات الممكنة لكل فئة
+        for (int fiveHundred = 0; fiveHundred <= amount / 500; fiveHundred++) {
+            int remAfter500 = amount - fiveHundred * 500;
+            
+            for (int oneHundred = 0; oneHundred <= remAfter500 / 100; oneHundred++) {
+                int remAfter100 = remAfter500 - oneHundred * 100;
+                
+                for (int fifty = 0; fifty <= remAfter100 / 50; fifty++) {
+                    int remAfter50 = remAfter100 - fifty * 50;
+                    
+                    for (int ten = 0; ten <= remAfter50 / 10; ten++) {
+                        int remAfter10 = remAfter50 - ten * 10;
+                        
+                        for (int five = 0; five <= remAfter10 / 5; five++) {
+                            int remAfter5 = remAfter10 - five * 5;
+                            
+                            int one = remAfter5; // المتبقي يتم صرفه بـ فئة 1
+                            
+                            // التحقق من أن المجموع الكلي يساوي المبلغ المطلوب
+                            int total = fiveHundred * 500 + oneHundred * 100 + fifty * 50 + ten * 10 + five * 5 + one * 1;
+                            
+                            if (total == amount) {
+                                int notesCount = fiveHundred + oneHundred + fifty + ten + five + one;
+                                
+                                // إذا وجدنا عدداً أقل من الأوراق، نقوم بتحديث الأفضل
+                                if (notesCount < bestNotesCount) {
+                                    bestNotesCount = notesCount;
+                                    bestFiveHundred = fiveHundred;
+                                    bestOneHundred = oneHundred;
+                                    bestFifty = fifty;
+                                    bestTen = ten;
+                                    bestFive = five;
+                                    bestOne = one;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // طباعة النتائج النهائية
+        System.out.println("\nAmount: " + amount);
+        System.out.println("Best Notes count is: " + bestNotesCount);
+        System.out.println("\nBest Count for Every Note: ");
+        System.out.println("500 ---> " + bestFiveHundred);
+        System.out.println("100 ---> " + bestOneHundred);
+        System.out.println("50 ---> " + bestFifty);
+        System.out.println("10 ---> " + bestTen);
+        System.out.println("5 ---> " + bestFive);
+        System.out.println("1 ---> " + bestOne);
+    }
+
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        System.out.print("Enter the Amount You Wish To Check (no decimals): ");
+        int amount = in.nextInt();
+        brute_force_ATM(amount);
+    }
+}
 
