@@ -28,7 +28,7 @@ Dynamic Programming solves the problem by breaking it down into smaller sub-prob
 
 | Feature | Greedy Algorithm | Brute Force | Dynamic Programming |
 | :--- | :--- | :--- | :--- |
-| **Time Complexity** | $O(n)$ | $O(n^k)$ | $O(n)$ |
+| **Time Complexity** | $O(n)$ | $O(n^5)$ | $O(n)$ |
 | **Optimality** | Not always optimal | Always optimal | Always optimal |
 | **Logic** | Simple / Direct | Exhaustive Search | Sub-problem Solving |
 | **Best Use Case** | Standard Currencies | Small amounts only | Complex/Ideal systems |
