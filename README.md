@@ -1,35 +1,34 @@
 # ATM Change-Making Algorithms Project
 
-هذا المشروع يستعرض ثلاث استراتيجيات برمجية مختلفة لحل مشكلة "صرف العملات" (Change-Making Problem)، وهي عملية إيجاد أقل عدد ممكن من الأوراق النقدية لتكوين مبلغ معين.
+This project implements and compares three different algorithmic approaches to solve the "Change-Making Problem": finding the minimum number of banknotes required to make up a specific amount.
 
-## الخوارزميات المستخدمة (Algorithms Used)
+## Implemented Algorithms
 
-### 1. خوارزمية الجشع (Greedy Algorithm)
-تعتمد على اختيار أكبر فئة نقدية متاحة حالياً وخصمها من المبلغ، وتكرار العملية حتى ينتهي المبلغ.
-*   **طريقة العمل:** تركز على الخيار الأفضل في اللحظة الحالية دون النظر للمستقبل.
-*   **المميزات:** سريعة جداً وسهلة التنفيذ.
-*   **العيوب:** قد تفشل في إيجاد الحل الأمثل (أقل عدد أوراق) في بعض أنظمة العملات غير القياسية.
+### 1. Greedy Algorithm
+The Greedy approach always selects the largest possible banknote denomination at each step until the total amount is reached.
+*   **How it works:** It makes the "locally optimal" choice at each stage.
+*   **Pros:** Extremely fast and simple to implement.
+*   **Cons:** It might not always provide the absolute minimum number of notes for all currency systems, though it works for most standard ones.
 
-### 2. خوارزمية القوة الغاشمة (Brute Force)
-تقوم بتجربة كافة الاحتمالات الممكنة لدمج الفئات النقدية حتى تجد التشكيلة التي تعطي أقل عدد من الأوراق.
-*   **طريقة العمل:** استخدام حلقات متداخلة (Nested Loops) لتجربة كل رقم ممكن من كل فئة.
-*   **المميزات:** تضمن دائماً العثور على الحل الأفضل والأمثل.
-*   **العيوب:** بطيئة جداً وتستهلك موارد المعالج بشكل هائل مع المبالغ الكبيرة.
+### 2. Brute Force Algorithm
+This algorithm explores every possible combination of banknotes to find the one that results in the minimum count.
+*   **How it works:** It uses nested loops to iterate through all possible quantities of each denomination (500, 100, 50, 10, 5, 1).
+*   **Pros:** Guaranteed to find the optimal (mathematically best) solution.
+*   **Cons:** Very inefficient for large amounts due to high computational complexity (Exponential time).
 
-### 3. البرمجة الديناميكية (Dynamic Programming)
-تحل المشكلة عن طريق تقسيمها إلى مشاكل فرعية أصغر وتخزين نتائج هذه المشاكل في جدول (Table) لتجنب تكرار الحسابات.
-*   **طريقة العمل:** بناء جدول تدريجي يحسب أقل عدد أوراق لكل مبلغ من 1 وصولاً إلى المبلغ المطلوب.
-*   **المميزات:** تعطي الحل الأمثل دائماً وبسرعة أداء أفضل بكثير من القوة الغاشمة.
-*   **العيوب:** تستهلك مساحة إضافية في الذاكرة (Memory) لتخزين الجدول.
+### 3. Dynamic Programming (DP)
+Dynamic Programming solves the problem by breaking it down into smaller sub-problems and storing their results in a table to avoid redundant calculations.
+*   **How it works:** It builds a table (2D array) representing the minimum notes needed for every amount from 0 up to the target.
+*   **Pros:** Always finds the optimal solution with much better performance than Brute Force.
+*   **Cons:** Requires additional memory (Space Complexity) to store the DP table.
 
 ---
 
-## مقارنة بين الخوارزميات (Comparison Table)
+## Comparison Table
 
-| وجه المقارنة | Greedy | Brute Force | Dynamic Programming |
+| Feature | Greedy Algorithm | Brute Force | Dynamic Programming |
 | :--- | :--- | :--- | :--- |
-| **السرعة (Time Complexity)** | سريعة جداً $O(n)$ | بطيئة جداً (أسية) | فعالة $O(n \times m)$ |
-| **دقة الحل (Optimality)** | ليس دائماً الأمثل | دائماً الأمثل | دائماً الأمثل |
-| **الاستخدام الموصى به** | العملات القياسية (مثل الريال/الدولار) | المبالغ الصغيرة جداً فقط | أفضل حل عام للمشاكل المعقدة |
-
----
+| **Speed (Efficiency)** | Very Fast ($O(n)$) | Very Slow (Exponential) | Efficient ($O(n \times m)$) |
+| **Optimality** | Not always optimal | Always optimal | Always optimal |
+| **Logic** | Simple / Direct | Exhaustive Search | Sub-problem Solving |
+| **Best Use Case** | Standard Currencies | Tiny amounts only | Complex/Ideal systems |
