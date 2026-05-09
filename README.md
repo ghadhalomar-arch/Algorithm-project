@@ -8,19 +8,19 @@ This project implements and compares three different algorithmic approaches to s
 The Greedy approach always selects the largest possible banknote denomination at each step until the total amount is reached.
 *   **How it works:** It makes the "locally optimal" choice at each stage.
 *   **Pros:** Extremely fast and simple to implement.
-*   **Cons:** It might not always provide the absolute minimum number of notes for all currency systems, though it works for most standard ones.
+*   **Cons:** It might not always provide the absolute minimum number of notes for all currency systems.
 
 ### 2. Brute Force Algorithm
 This algorithm explores every possible combination of banknotes to find the one that results in the minimum count.
-*   **How it works:** It uses nested loops to iterate through all possible quantities of each denomination (500, 100, 50, 10, 5, 1).
-*   **Pros:** Guaranteed to find the optimal (mathematically best) solution.
-*   **Cons:** Very inefficient for large amounts due to high computational complexity (Exponential time).
+*   **How it works:** It uses nested loops to iterate through all possible quantities of each denomination.
+*   **Pros:** Guaranteed to find the optimal solution.
+*   **Cons:** Extremely inefficient for large amounts due to the nested loop structure.
 
 ### 3. Dynamic Programming (DP)
-Dynamic Programming solves the problem by breaking it down into smaller sub-problems and storing their results in a table to avoid redundant calculations.
-*   **How it works:** It builds a table (2D array) representing the minimum notes needed for every amount from 0 up to the target.
+Dynamic Programming solves the problem by breaking it down into smaller sub-problems and storing their results in a table.
+*   **How it works:** It builds a 2D table to compute the value of the optimal solution for each sub-amount.
 *   **Pros:** Always finds the optimal solution with much better performance than Brute Force.
-*   **Cons:** Requires additional memory (Space Complexity) to store the DP table.
+*   **Cons:** Requires additional memory to store the DP table.
 
 ---
 
@@ -28,7 +28,7 @@ Dynamic Programming solves the problem by breaking it down into smaller sub-prob
 
 | Feature | Greedy Algorithm | Brute Force | Dynamic Programming |
 | :--- | :--- | :--- | :--- |
-| **Speed (Efficiency)** | Very Fast ($O(n)$) | Very Slow (Exponential) | Efficient ($O(n \times m)$) |
+| **Time Complexity** | $O(n)$ | $O(n^k)$ | $O(n \times m)$ |
 | **Optimality** | Not always optimal | Always optimal | Always optimal |
 | **Logic** | Simple / Direct | Exhaustive Search | Sub-problem Solving |
-| **Best Use Case** | Standard Currencies | Tiny amounts only | Complex/Ideal systems |
+| **Best Use Case** | Standard Currencies | Small amounts only | Complex/Ideal systems |
