@@ -1,75 +1,62 @@
 package aryam.bruteforce;
 import java.util.Scanner;
+public class BruteForce {   
+ public static void brute_force_ATM(int Amount){
+     int amount = Amount; // the amount value
+     int bestNotesCount = Integer.MAX_VALUE;
+     
+     int bestFiveHundred = 0, bestOneHundred =0, bestFifty = 0, bestTen = 0, bestFive = 0, bestOne = 0;
+     
+     for (int fiveHundred = 0; fiveHundred <= amount / 500; fiveHundred++) { //loop to find best amount of 500s
+         int remAfter500 = amount - fiveHundred * 500;
 
-public class BruteForce {
-    public static void brute_force_ATM(int Amount) {
-        int amount = Amount; // the amount value
-        int bestNotesCount = Integer.MAX_VALUE;
-        
-        int bestFiveHundred = 0, bestOneHundred = 0, bestFifty = 0, bestTen = 0, bestFive = 0, bestOne = 0;
-        
-        for (int fiveHundred = 0; fiveHundred <= amount / 500; fiveHundred++) { // loop to find best amount of 500s
-            int remAfter500 = amount - fiveHundred * 500;
-            
-            for (int oneHundred = 0; oneHundred <= remAfter500 / 100; oneHundred++) { // loop to find best amount of 100s
-                int remAfter100 = remAfter500 - oneHundred * 100;
-                
-                for (int fifty = 0; fifty <= remAfter100 / 50; fifty++) { // loop to find best amount of 50s
-                    int remAfter50 = remAfter100 - fifty * 50;
-                    
-                    for (int ten = 0; ten <= remAfter50 / 10; ten++) { // loop to find best amount of 10s
-                        int remAfter10 = remAfter50 - ten * 10;
-                        
-                        for (int five = 0; five <= remAfter10 / 5; five++) { // loop to find best amount of 5s
-                            int remAfter5 = remAfter10 - five * 5;
-                            
-                            int one = remAfter5;
-                            
-                            int total = fiveHundred * 500 + oneHundred * 100 + fifty * 50 + ten * 10 + five * 5 + one * 1;
-                            
-                            if (total == amount) {
-                                int notesCount = fiveHundred + oneHundred + fifty + ten + five + one; // to find the best total notes
-                                
-                                if (notesCount < bestNotesCount) { // if true --> updates all to the new best
-                                    bestNotesCount = notesCount;
-                                    
-                                    bestFiveHundred = fiveHundred;
-                                    bestOneHundred = oneHundred;
-                                    bestFifty = fifty;
-                                    bestTen = ten;
-                                    bestFive = five;
-                                    bestOne = one;
-                                }
-                            }
-                        } // end for five 
-                    } // end for ten 
-                } // end for fifty 
-            } // end for oneHundred 
-        } // end for fiveHundred 
+         for (int oneHundred = 0; oneHundred <= remAfter500 / 100; oneHundred++) { //loop to find best amount of 100s
+             int remAfter100 = remAfter500 - oneHundred * 100;
+             
+             for (int fifty = 0; fifty <= remAfter100 / 50; fifty++) { //loop to find best amount of 50s
+                 int remAfter50 = remAfter100 - fifty * 50;
 
-        // printing
-        System.out.println("\nAmount: " + amount);
-        System.out.println("Best Notes count is: " + bestNotesCount);
-        System.out.println("\nBest Count for Every Note: ");
-        System.out.println("500 ---> " + bestFiveHundred);
-        System.out.println("100 ---> " + bestOneHundred);
-        System.out.println("50 ---> " + bestFifty);
-        System.out.println("10 ---> " + bestTen);
-        System.out.println("5 ---> " + bestFive);
-        System.out.println("1 ---> " + bestOne);
-    } // brute_force_ATM method
+                 for (int ten = 0; ten <= remAfter50 / 10; ten++) { //loop to find best amount of 10s
+                     int remAfter10 = remAfter50 - ten * 10;
 
+                     for (int five = 0; five <= remAfter10 / 5; five++) { //loop to find best amount of 5s
+                         int remAfter5 = remAfter10 - five * 5;
+
+                         int one = remAfter5; //diractly get the amount of 1's to optemize big O from O(n^6) to O(n^5)
+
+                             int total = fiveHundred * 500 + oneHundred * 100 + fifty * 50 + ten * 10 + five * 5 + one * 1; // to get the current total with the current number of notes
+
+                             if (total == amount) {
+                                 int notesCount = fiveHundred + oneHundred + fifty + ten + five + one; // to find the best total # of notes
+
+                                 if (notesCount < bestNotesCount) { // if true --> updates all to the new best  
+                                     bestNotesCount = notesCount;
+
+                                     bestFiveHundred = fiveHundred;
+                                     bestOneHundred = oneHundred;
+                                     bestFifty = fifty;
+                                     bestTen = ten;
+                                     bestFive = five;
+                                     bestOne = one;
+                             }/* if -->updating */  }/* if -->checking for amount */  }/* for -->#5 */  }/* for -->#10 */  }/* for -->#50 */ } /* for -->#100 */ }/* for -->#500 */
+   // printing
+     System.out.println("\nAmount: " + amount);
+     System.out.println("Best Notes Count is: " + bestNotesCount);
+     System.out.println("\nBest Count for Every Note: ");
+     System.out.println("500 ---> " + bestFiveHundred);
+     System.out.println("100 ---> " + bestOneHundred);
+     System.out.println("50 --->  " + bestFifty);
+     System.out.println("10 ---> " + bestTen);
+     System.out.println("5 ---> " + bestFive);
+     System.out.println("1 ---> " + bestOne);
+ }// brute_force_ATM method     
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-
+        
         double T1 = System.nanoTime();
-
-        System.out.print("Enter the Amount You Wish To Check (no decimals): ");
-        int amount = in.nextInt();
-        brute_force_ATM(amount);
-
+          System.out.print("Enter the Amount You Wish To Check (no decimals):");
+          int amount = in.nextInt();
+          brute_force_ATM(amount);
         double T2 = System.nanoTime();
-        System.out.print("\nExecution time:" + (T2-T1));
-    } // main method 
-} // BruteForce class 
-
+         System.out.print("\nExecution time:" + (T2-T1));
+    }/* main method */  }/* BruteForce class*/
