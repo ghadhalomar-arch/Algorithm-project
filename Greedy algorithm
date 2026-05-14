@@ -1,25 +1,32 @@
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 
  * @author ghadh
  */
 public class Greedy {
-
-    public static void GreedyChange(int amount) {
-        int[] denominations = {500, 100, 50, 10, 5, 1};
-        List<Integer> change = new ArrayList<>();
-        
-        for (int coin : denominations) {
-            while (amount >= coin) {
-                change.add(coin);
-                amount = amount - coin;
-            }
+public static void GreedyChange(int amount) {
+        int[] denominations = {1, 5, 10, 50, 100, 500};
+        //to count number of banknotes used for per denomination
+        int [] count = new int [denominations.length];
+        // initalize count array by zeros refering to there is no banknote has been taken yet 
+        for (int j=0; j<count.length; j++){
+            count[j]=0;
         }
-        
-        System.out.println("change : " + change);
-        System.out.println("number of banknotes : " + change.size());
+        // to count minimum total number of used banknotes
+        int total=0;
+        // initially we will start from largest denominations to applies greedy approach
+        for (int i=denominations.length-1; i>= 0; i--) {
+            // take as large as possible number of each denomination
+            count[i]= amount/denominations[i];
+            total += count[i];
+            // update remaining amount
+            amount = amount%denominations[i];
+        }
+        // printing the solution
+        System.out.println("number of banknotes : " + total);
+        for(int k=count.length-1; k>=0 ; k--){
+            System.out.println(denominations[k]+" --> "+count[k]);
+        }
     }
-}
+    }
 
