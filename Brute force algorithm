@@ -1,10 +1,10 @@
 package aryam.bruteforce;
 import java.util.Scanner;
 public class BruteForce {   
- public static void brute_force_ATM(int Amount){
-     int amount = Amount; // the amount value
+ public static void brute_force_ATM(int amount){
+     // to store minimum total number of bankNotes used  
      int bestNotesCount = Integer.MAX_VALUE;
-     
+     // to store number of banknotes that will be used for each denomination
      int bestFiveHundred = 0, bestOneHundred =0, bestFifty = 0, bestTen = 0, bestFive = 0, bestOne = 0;
      
      for (int fiveHundred = 0; fiveHundred <= amount / 500; fiveHundred++) { //loop to find best amount of 500s
@@ -22,7 +22,7 @@ public class BruteForce {
                      for (int five = 0; five <= remAfter10 / 5; five++) { //loop to find best amount of 5s
                          int remAfter5 = remAfter10 - five * 5;
 
-                         int one = remAfter5; //diractly get the amount of 1's to optemize big O from O(n^6) to O(n^5)
+                         int one = remAfter5; //diractly get the amount of 1's to optimize big O from O(n^6) to O(n^5)
 
                              int total = fiveHundred * 500 + oneHundred * 100 + fifty * 50 + ten * 10 + five * 5 + one * 1; // to get the current total with the current number of notes
 
@@ -39,7 +39,7 @@ public class BruteForce {
                                      bestFive = five;
                                      bestOne = one;
                              }/* if -->updating */  }/* if -->checking for amount */  }/* for -->#5 */  }/* for -->#10 */  }/* for -->#50 */ } /* for -->#100 */ }/* for -->#500 */
-   // printing
+   // printing number of used banknotes in each denomination
      System.out.println("\nAmount: " + amount);
      System.out.println("Best Notes Count is: " + bestNotesCount);
      System.out.println("\nBest Count for Every Note: ");
